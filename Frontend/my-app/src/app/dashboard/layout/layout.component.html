@@ -1,1 +1,33 @@
-<p>layout works!</p>
+<header>
+    <div class="logo">
+        <h2><strong>digital</strong>flake</h2>
+    </div>
+    <div class="logo2">
+        <mat-icon>account_circle</mat-icon>
+    </div>
+</header>
+<div class="container">
+    <div class="side">
+        <a routerLink="home">
+            <div class="box">
+                <mat-icon>home</mat-icon>
+                <h2>Home</h2>
+            </div>
+        </a>
+        <a routerLink="category">
+            <div class="box">
+                <mat-icon>view_module</mat-icon>
+                <h2>Category</h2>
+            </div>
+        </a>
+        <a routerLink="product">
+            <div class="box">
+                <mat-icon>inventory_2</mat-icon>
+                <h2>Products</h2>
+            </div>
+        </a>
+    </div>
+    <div class="main">
+        <router-outlet></router-outlet>
+    </div>
+</div>

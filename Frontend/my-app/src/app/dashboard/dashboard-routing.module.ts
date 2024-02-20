@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AuthGuard } from '../guards/auth-guard.guard';
+import { CategoryComponent } from './category/category.component';
+import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
   { path:'dashboard', 
@@ -10,7 +12,9 @@ const routes: Routes = [
   canActivate:[AuthGuard],
   children:[
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent}
+    { path: 'home', component: HomeComponent},
+    { path: 'category', component: CategoryComponent},
+    { path: 'product', component: ProductsComponent}
   ]
   }
 ];
