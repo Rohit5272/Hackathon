@@ -6,15 +6,18 @@
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: contain;
+    box-sizing: border-box;
 }
 .container {
     position: absolute;
-    top: 8%; /* Adjust top positioning as desired */
-    left: 2%; /* Adjust left positioning as desired */
-    border: 1px solid black;
+    top: 8%; 
+    left: 2%; 
+    border: none;
     height: 600px;
     width: 550px;
     background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0px 3px 0 rgb(99, 96, 96),0 2px 5px 0 rgb(161, 158, 158);
 }
 .logo {
     width: 45%;
@@ -30,5 +33,28 @@
     text-align: center;
     margin: 0;
     color: rgb(124, 122, 122);
+}
+.input-field {
+    width: 100%;
+    padding: 5%;
+    margin-top: 5%;
+}
+input {
+    border: 1px solid gray;
+    width: 98%;
+    padding: 2% 2%;
+    border-radius: 5px;
+    margin-bottom: 5%;
+    margin-top: 2%;
+}
+button {
+    color: white;
+    background-color: rgb(112, 33, 186);
+    width: 100%;
+    border: none;
+    padding: 2%;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-top: 10%;
 }
 
