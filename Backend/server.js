@@ -6,6 +6,10 @@ const userRoutes = require('./routes/userRoutes')
 const categoryRoutes = require('./routes/categoryRoutes')
 const productRoutes = require('./routes/productRoutes')
 const authenticate = require('./authenticate')
+const cors = require("cors");
+
+app.use(cors());
+app.options("*", cors());
 
 // Database connection
 const mongoose = require("mongoose");

@@ -5,11 +5,11 @@
         </div>
         <h2>welcome to Digitalflake Admin</h2>
         <div class="input-field">
-            <form>
+            <form [formGroup]="userForm" (ngSubmit)="submit(userForm.value)">
                 <label for="">Email ID</label><br>
-                <input type="text"><br>
+                <input type="text" formControlName="email"><br>
                 <label for="">Password</label><br>
-                <input type="text"><br>
+                <input type="text" formControlName="password"><br>
                 <button>Log In</button>
         </form>
         </div>
