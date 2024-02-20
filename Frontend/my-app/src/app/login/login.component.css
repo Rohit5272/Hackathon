@@ -1,0 +1,34 @@
+.fullpage {
+    position: relative; /* Ensure positioning context for absolute positioning */
+    background-image: url('https://s3-alpha-sig.figma.com/img/4f8b/6e9d/609c7731d037f1b65d00906a7bc1e241?Expires=1709510400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Lb~DCvDWLcFkDtiNVfcZqGTXnoC7RSzqCMYJZQ~4GU-MdWV0roKSRgV3WlvM7Ovg1xwGhb9PNOzuerlNAKmkvMirm7jRGk0d4RNkOCEoJnsSCOTgXJsJW-ToggzcXjMHABCewk9rAfXUkNlkHjvP9o-dOHQHN5ZXFNkyJdfJ5VCpQ7Z1vuu6lOt0y-jHcIFP5GidiRZ0aP2L3gSc5ymrXeNLIQ8uhctZMvECoz2wHU4Nj22bwASU0aOCGesuJkk46rwUxTbd82LAkXjFAhZ7ruPMyOWN3gGkpv4Mfj37quE7ywEuesibtp6DEC7tNA4zOKPbek89cTLAcDycrvJszQ__');
+    height: 95vh;
+    width: 100%;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: contain;
+}
+.container {
+    position: absolute;
+    top: 8%; /* Adjust top positioning as desired */
+    left: 2%; /* Adjust left positioning as desired */
+    border: 1px solid black;
+    height: 600px;
+    width: 550px;
+    background-color: white;
+}
+.logo {
+    width: 45%;
+    margin: auto;
+    margin-top: 5%;
+}
+.logo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.container h2 {
+    text-align: center;
+    margin: 0;
+    color: rgb(124, 122, 122);
+}
+
