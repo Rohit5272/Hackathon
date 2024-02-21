@@ -76,7 +76,6 @@ exports.deleteProduct = (req,res) => {
 exports.updateProduct = (req, res) => {
   const productId = req.params.id;
   const updateData = req.body;
-  // If the updateData contains categoryName, check if the category exists
   if (updateData.category) {
     Category.findOne({ name: updateData.category })
       .then((category) => {

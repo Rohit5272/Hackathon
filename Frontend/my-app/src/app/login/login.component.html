@@ -7,9 +7,9 @@
         <div class="input-field">
             <form [formGroup]="userForm" (ngSubmit)="submit(userForm.value)">
                 <label for="">Email ID</label><br>
-                <input type="text" formControlName="email"><br>
+                <input type="email" formControlName="email"><br>
                 <label for="">Password</label><br>
-                <input type="text" formControlName="password"><br>
+                <input type="password" formControlName="password"><br>
                 <button>Log In</button>
         </form>
         </div>

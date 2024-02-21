@@ -2,7 +2,7 @@ const Category = require("../models/category");
 
 // Create
 exports.createCategory = (req, res) => {
-  console.log("Create");
+  // console.log("Create");
   const { name, description, status } = req.body;
   const userId = req.userData.id;
   const category = new Category({
@@ -26,7 +26,7 @@ exports.getCategory = (req, res) => {
   const userId = req.userData.id;
 
   Category.find({ user: userId })
-    .then((data) => res.json({ message: "Posts retrieved successfully", data }))
+    .then((data) => res.json( data ))
     .catch((err) =>
       res.status(400).json({ message: "Failed to retrieve posts", error: err })
     );
@@ -34,7 +34,7 @@ exports.getCategory = (req, res) => {
 
 // Get Single Data
 exports.GetSingleCategory = (req, res) => {
-  console.log("Get Single");
+  // console.log("Get Single");
   const categoryId = req.params.id;
   const userId = req.userData.id;
   Category.findOne({ _id: categoryId, user: userId })

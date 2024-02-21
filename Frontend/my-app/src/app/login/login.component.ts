@@ -26,7 +26,7 @@ export class LoginComponent {
     this._auth.login(user).subscribe((data) => {
       console.log(data);
       this._router.navigate(['/dashboard']);
-      sessionStorage.setItem('user',JSON.stringify(data))
+      localStorage.setItem('user', JSON.stringify(data))
     })
   }
 }

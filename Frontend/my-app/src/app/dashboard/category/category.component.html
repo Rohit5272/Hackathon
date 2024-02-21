@@ -1,5 +1,5 @@
 <div class="container">
-    <!-- <div class="show-data">
+    <div class="show-data" *ngIf="show">
         <div class="top">
             <mat-icon>view_module</mat-icon>
             <h3>Category</h3>
@@ -15,29 +15,32 @@
                     <th>Status</th>
                     <th></th>
                 </tr>
-                <tr>
-                    <td>123</td>
-                    <td>Milk</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing.</td>
-                    <td>Active</td>
+                <tr *ngFor="let i of category;let index = index">
+                    <td>{{index + 1}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.description}}</td>
+                    <td>{{ i.status ? 'Active' : 'Inactive' }}</td>
                     <td>
-                        <button><mat-icon>edit_square</mat-icon></button>
-                        <button><mat-icon>delete</mat-icon></button>
+                        <button (click)="change()"><mat-icon>edit_square</mat-icon></button>
+                        <button (click)="delete(i._id)"><mat-icon>delete</mat-icon></button>
                     </td>
                 </tr>
             </table>
         </div>
-    </div> -->
-    <div class="form-data">
-        <h3>Add Category</h3>
+    </div>
+    <div class="form-data" *ngIf="!show">
+        <div class="arrow">
+            <button (click)="change()"><mat-icon>arrow_back</mat-icon></button>
+            <h3>Add Category</h3>
+        </div>
         <form>
             <input type="text" placeholder="Category Name">
             <input type="text" placeholder="Description">
             <input type="text" placeholder="Status">
+            <div class="btn">
+                <button (click)="change()">Cancel</button>
+                <button type="submit">Save</button>
+            </div>
         </form>
-        <div class="btn">
-            <button>Cancel</button>
-            <button>Save</button>
-        </div>
     </div>
 </div>

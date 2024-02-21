@@ -26,8 +26,7 @@ User.methods.generateJWT = function () {
       id: this._id,
       exp: Math.floor(expiration.getTime() / 1000),
     },
-    config.secret
-  );
+    config.secret);
 };
 
 module.exports = mongoose.model("User", User);

@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    return sessionStorage.getItem('user');
+    return localStorage.getItem('user');
   }
 
 }

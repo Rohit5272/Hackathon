@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { CategoryComponent } from './category/category.component';
 import { ProductsComponent } from './products/products.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ProductsComponent } from './products/products.component';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModule { }

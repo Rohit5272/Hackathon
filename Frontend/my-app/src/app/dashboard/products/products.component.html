@@ -1,10 +1,10 @@
 <div class="container">
-    <!-- <div class="show-data">
+    <div class="show-data" *ngIf="show">
         <div class="top">
             <mat-icon>view_module</mat-icon>
-            <h3>Category</h3>
+            <h3>Products</h3>
             <input type="text">
-            <button>Add New</button>
+            <button (click)="change()">Add New</button>
         </div>
         <div class="show-list">
             <table>
@@ -18,37 +18,45 @@
                     <th>Status</th>
                     <th></th>
                 </tr>
-                <tr>
-                    <td>123</td>
-                    <td>Amul Taaza</td>
-                    <td>500 ml</td>
-                    <td>Milk</td>
-                    <td>Rs 24</td>
+                <tr *ngFor="let i of products;let index = index">
+                    <td>{{index + 1}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.packSize}} ml</td>
+                    <td>{{i.category}}</td>
+                    <td>Rs {{i.MRP}}</td>
                     <td>
-                        <img src="https://s3-alpha-sig.figma.com/img/5717/372d/d1394c21370f384060ae74a34d5b7c03?Expires=1709510400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=XJZWYbMwfvK8xRdTotgKxj9jSxjreHp8UsDme-t5OacQWwk4XnxR70zObGE8QGEiPwwRazjHUYakKWEQUqq~2vEnwo9FxALEkW8-uMQPfbNT7cXpV-KWNHARB1lZ93iWhlrV3xJUaXRxgj0WYtq8yjxN1pJhqTjvqYpxqqiirI2JOBQvra9QOokqeq~ASuCo8Z~50-p~y3-YNFSUaUBW9GmjaI08xVlY2HKUXRY-tQEUremWG0epZL1Qdm7JKcwUoJg3MJ-EPRWXJLt8qa2I614GLVJA3tVWi0DuXnkFuRx5YJ5ViA3OFsON~Gwqogo2prRHF-t-rl5bBoywLVMkyg__" alt="">
+                        <img src="{{i.image}}" alt="">
                     </td>
-                    <td>Active</td>
+                    <td>{{ i.status ? 'Active' : 'Inactive' }}</td>
                     <td>
-                        <button><mat-icon>edit_square</mat-icon></button>
-                        <button><mat-icon>delete</mat-icon></button>
+                        <button (click)="change()"><mat-icon>edit_square</mat-icon></button>
+                        <button (click)="delete(i._id)"><mat-icon>delete</mat-icon></button>
                     </td>
                 </tr>
             </table>
         </div>
-    </div> -->
-    <div class="form-data">
-        <h3>Add Category</h3>
-        <form>
-            <input type="text" placeholder="Category">
-            <input type="text" placeholder="Product Name">
-            <input type="text" placeholder="Pack Size">
-            <input type="text" placeholder="MRP">
-            <input type="text" placeholder="Product Image">
-            <input type="text" placeholder="Status">
-        </form>
-        <div class="btn">
-            <button>Cancel</button>
-            <button>Save</button>
+    </div> 
+    <div class="form-data" *ngIf="!show">
+        <div class="arrow">
+            <button (click)="change()"><mat-icon>arrow_back</mat-icon></button>
+            <h3>Add Products</h3>
+            
         </div>
+        <form [formGroup]="productForm" (ngSubmit)="submit(productForm.value)">
+            <input type="text" formControlName="name" placeholder="name">
+            <input type="text" formControlName="packSize" placeholder="packSize">
+            <input type="text" formControlName="category" placeholder="category">
+            <input type="text" formControlName="MRP" placeholder="MRP">
+            <input type="text" formControlName="image" placeholder="Product Image">
+            <select id="status" formControlName="status">
+                <option value="" disabled>Status</option>
+                <option value="true">Active</option>
+                <option value="false">InActive</option>
+            </select>
+            <div class="btn">
+                <button (click)="change()">Cancel</button>
+                <button type="submit">Save</button>
+            </div>
+        </form>
     </div>
 </div>
