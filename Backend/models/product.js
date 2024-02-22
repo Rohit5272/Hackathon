@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
   packSize: { type: String, required: true },
   MRP: { type: Number, required: true },
   image: { type: String }, // image URLs
-  status: { type: Boolean, default: true },
+  status: { type: Boolean, required: true},
   category: {
     type: String,
     ref: "Category",

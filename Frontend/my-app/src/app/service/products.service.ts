@@ -12,49 +12,33 @@ export class ProductsService {
   constructor(private _auth: AuthService,private _http: HttpClient) { }
 
   getProducts() {
-    let token;
-    if(this._auth.isAuthenticated()) {
-      const user = JSON.parse(this._auth.isAuthenticated())
-      token = user.token ? user.token : '';
-    }
-    const httOptions = {
-      headers : new HttpHeaders({
-        'Content-Type' : 'application/json',
-        'Authorization': token
-      })
-    }
-    return this._http.get(`${baseURL}/find`,httOptions)
+    return this._http.get(`${baseURL}/find`,this.httOptions())
   }
 
   createProducts(data:any) {
-    console.log(data);
-    let token: any;
-    if(this._auth.isAuthenticated()) {
-      const user = JSON.parse(this._auth.isAuthenticated())
-      token = user.token ? user.token : '';
-    }
-    const httOptions = {
-      headers : new HttpHeaders({
-        'Content-Type' : 'application/json',
-        'Authorization': token
-      })
-    }
-    return this._http.post(`${baseURL}/create`,data,httOptions)
+    return this._http.post(`${baseURL}/create`,data,this.httOptions())
+  }
+  // Update Product
+  updateProduct(data:any) {
+    return this._http.put(`${baseURL}/update/${data.id}`,data,this.httOptions())
   }
 
   deleteProducts(id:any) {
-    console.log(id);
+    return this._http.delete(`${baseURL}/delete/${id}`,this.httOptions())
+  }
+
+  // Authorization token
+  private httOptions() {
     let token;
     if(this._auth.isAuthenticated()) {
       const user = JSON.parse(this._auth.isAuthenticated())
       token = user.token ? user.token : '';
     }
-    const httOptions = {
+    return {
       headers : new HttpHeaders({
         'Content-Type' : 'application/json',
         'Authorization': token
       })
     }
-    return this._http.delete(`${baseURL}/delete/${id}`,httOptions)
   }
 }

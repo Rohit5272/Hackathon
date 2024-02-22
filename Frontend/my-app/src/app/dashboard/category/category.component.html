@@ -4,7 +4,7 @@
             <mat-icon>view_module</mat-icon>
             <h3>Category</h3>
             <input type="text">
-            <button>Add New</button>
+            <button (click)="change()">Add New</button>
         </div>
         <div class="show-list">
             <table>
@@ -21,7 +21,7 @@
                     <td>{{i.description}}</td>
                     <td>{{ i.status ? 'Active' : 'Inactive' }}</td>
                     <td>
-                        <button (click)="change()"><mat-icon>edit_square</mat-icon></button>
+                        <button (click)="edit(i)"><mat-icon>edit_square</mat-icon></button>
                         <button (click)="delete(i._id)"><mat-icon>delete</mat-icon></button>
                     </td>
                 </tr>
@@ -33,13 +33,26 @@
             <button (click)="change()"><mat-icon>arrow_back</mat-icon></button>
             <h3>Add Category</h3>
         </div>
-        <form>
-            <input type="text" placeholder="Category Name">
-            <input type="text" placeholder="Description">
-            <input type="text" placeholder="Status">
+        <form [formGroup]="categoryForm" (ngSubmit)="submit(categoryForm.value)">
+            <input type="text" style="display: none;" formControlName="id">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input type="text" formControlName="name"  matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <input type="text" formControlName="description"  matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status">
+                    <mat-option value="true">Active</mat-option>
+                    <mat-option value="false">Inactive</mat-option>
+                </mat-select>
+            </mat-form-field>
             <div class="btn">
                 <button (click)="change()">Cancel</button>
-                <button type="submit">Save</button>
+                <button type="submit">{{options}}</button>
             </div>
         </form>
     </div>

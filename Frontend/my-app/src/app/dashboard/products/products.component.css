@@ -76,11 +76,11 @@ table button {
   font-size: 1.2rem;
 }
 .form-data input {
-  margin: 1% 2%;
-  width: 28%;
-  border-radius: 5px;
-  border: 1px solid black;
-  padding: 1% 2%;
+  padding: 0.1px 2px;
+}
+mat-form-field {
+  width: 29%;
+  margin: 0.1% 2%;
 }
 .arrow {
   display: flex;
@@ -99,7 +99,7 @@ table button {
   right: 0;
   margin: 6% 10%;
   /* border: 1px solid black; */
-  width: 35%;
+  width: 38%;
 }
 .btn button {
   margin: 1% 10%;

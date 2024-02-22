@@ -12,14 +12,13 @@ exports.createProduct = (req,res) => {
           return res.status(400).send("Category not found");
         }
         const newProduct = new Product({
-          name,
-          packSize,
-          MRP,
-          image,
-          status,
+          name: name,
+          packSize: packSize,
+          MRP: MRP,
+          image: image,
+          status: status ? status : false,
           category: category.name,
         });
-
         return newProduct.save();
       })
       .then((data) => {

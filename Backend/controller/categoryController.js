@@ -8,13 +8,13 @@ exports.createCategory = (req, res) => {
   const category = new Category({
     name: name,
     description: description,
-    status: status,
+    status: status ? status : false,
     user: userId,
   });
   category
     .save()
     .then((result) => {
-      res.send("Post Created Successfully" + result);
+      res.send(result);
     })
     .catch((err) => {
       res.send("not created" + err);

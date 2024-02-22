@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="show-data" *ngIf="show">
+    <div class="show-data" *ngIf="!show">
         <div class="top">
             <mat-icon>view_module</mat-icon>
             <h3>Products</h3>
@@ -29,33 +29,51 @@
                     </td>
                     <td>{{ i.status ? 'Active' : 'Inactive' }}</td>
                     <td>
-                        <button (click)="change()"><mat-icon>edit_square</mat-icon></button>
+                        <button (click)="edit(i)"><mat-icon>edit_square</mat-icon></button>
                         <button (click)="delete(i._id)"><mat-icon>delete</mat-icon></button>
                     </td>
                 </tr>
             </table>
         </div>
     </div> 
-    <div class="form-data" *ngIf="!show">
+    <div class="form-data" *ngIf="show">
         <div class="arrow">
             <button (click)="change()"><mat-icon>arrow_back</mat-icon></button>
             <h3>Add Products</h3>
             
         </div>
         <form [formGroup]="productForm" (ngSubmit)="submit(productForm.value)">
-            <input type="text" formControlName="name" placeholder="name">
-            <input type="text" formControlName="packSize" placeholder="packSize">
-            <input type="text" formControlName="category" placeholder="category">
-            <input type="text" formControlName="MRP" placeholder="MRP">
-            <input type="text" formControlName="image" placeholder="Product Image">
-            <select id="status" formControlName="status">
-                <option value="" disabled>Status</option>
-                <option value="true">Active</option>
-                <option value="false">InActive</option>
-            </select>
+            <input type="text" style="display: none;" formControlName="id">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input type="text" formControlName="name"  matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Pack Size</mat-label>
+                <input type="text" formControlName="packSize"  matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Category</mat-label>
+                <input type="text" formControlName="category"  matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>MRP</mat-label>
+                <input type="text" formControlName="MRP"  matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Image</mat-label>
+                <input type="text" formControlName="image"  matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="status">
+                    <mat-option value="true">Active</mat-option>
+                    <mat-option value="false">Inactive</mat-option>
+                </mat-select>
+            </mat-form-field>
             <div class="btn">
                 <button (click)="change()">Cancel</button>
-                <button type="submit">Save</button>
+                <button type="submit">{{options}}</button>
             </div>
         </form>
     </div>
