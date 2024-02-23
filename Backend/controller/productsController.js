@@ -22,7 +22,7 @@ exports.createProduct = (req,res) => {
         return newProduct.save();
       })
       .then((data) => {
-        res.send("Product created successfully!" + data);
+        res.send(data);
       })
       .catch((err) => {
         res.status(500).send(err);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { ProductsService } from 'src/app/service/products.service';
 
 @Component({
@@ -10,34 +10,47 @@ import { ProductsService } from 'src/app/service/products.service';
 export class ProductsComponent implements OnInit{
   
   show:boolean = true;
-  products:any = []
+  products:any = [];
   productForm:FormGroup;
   options:any = 'Submit'
+  selectedFile: File | null = null;
 
   constructor(private _products: ProductsService,private fb:FormBuilder) {
     this.productForm = this.fb.group({
-      name:'',
-      packSize:'',
-      category:'',
-      MRP:'',
-      image:'',
-      status:''
+      name:['', Validators.required],
+      packSize:['', Validators.required],
+      category:['', Validators.required],
+      MRP:['', Validators.required],
+      image:[''],
+      status:['', Validators.required]
     })
    }
 
   ngOnInit() {
     this.reload()
   }
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0] as File;
+  }
   
   submit(data:any){
     if(this.options == 'Submit') {
-      this._products.createProducts(data).subscribe(data => {
       console.log(data);
-    })
-    } else {
+      this._products.createProducts(data).subscribe({
+        next:(data) => {
+          this.reload()
+        },
+        error: (e) => console.error(e)
+      })
+    }
+    if(this.options == 'Edit') {
       console.log(data);
-      this._products.updateProduct(data).subscribe(data => {
-        console.log(data);
+      this._products.updateProduct(data).subscribe({
+        next:(data) => {
+          this.reload()
+        },
+        error: (e) => console.error(e)
       })
     }
     this.reload();
@@ -66,9 +79,12 @@ export class ProductsComponent implements OnInit{
     })
   }
   reload() {
-    this._products.getProducts().subscribe(data => {
-      this.products = data;
-      this.refresh()
+    this._products.getProducts().subscribe({
+      next:(data) => {
+        this.products = data;
+        this.refresh()
+      },
+      error: (e) => console.error(e)
     })
   }
   refresh() {

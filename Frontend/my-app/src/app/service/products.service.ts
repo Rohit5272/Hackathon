@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 const baseURL = "http://localhost:3000/product"
 
@@ -11,19 +12,19 @@ export class ProductsService {
 
   constructor(private _auth: AuthService,private _http: HttpClient) { }
 
-  getProducts() {
+  getProducts(): Observable<any>  {
     return this._http.get(`${baseURL}/find`,this.httOptions())
   }
 
-  createProducts(data:any) {
+  createProducts(data:any): Observable<any>  {
     return this._http.post(`${baseURL}/create`,data,this.httOptions())
   }
   // Update Product
-  updateProduct(data:any) {
+  updateProduct(data:any): Observable<any>  {
     return this._http.put(`${baseURL}/update/${data.id}`,data,this.httOptions())
   }
 
-  deleteProducts(id:any) {
+  deleteProducts(id:any): Observable<any>  {
     return this._http.delete(`${baseURL}/delete/${id}`,this.httOptions())
   }
 

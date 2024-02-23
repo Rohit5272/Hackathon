@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="show-data" *ngIf="!show">
+    <div class="show-data" *ngIf="show">
         <div class="top">
             <mat-icon>view_module</mat-icon>
             <h3>Products</h3>
@@ -36,7 +36,7 @@
             </table>
         </div>
     </div> 
-    <div class="form-data" *ngIf="show">
+    <div class="form-data" *ngIf="!show">
         <div class="arrow">
             <button (click)="change()"><mat-icon>arrow_back</mat-icon></button>
             <h3>Add Products</h3>
@@ -62,7 +62,7 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Image</mat-label>
-                <input type="text" formControlName="image"  matInput>
+                <input type="text" formControlName="image" matInput>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Status</mat-label>

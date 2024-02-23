@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/service/category.service';
 
 @Component({
@@ -10,16 +10,16 @@ import { CategoryService } from 'src/app/service/category.service';
 export class CategoryComponent implements OnInit{
 
   show:boolean = true;
-  category:any = []
+  category:any = [];
   categoryForm:FormGroup;
-  options:any = 'Submit'
+  options:any = 'Submit';
 
   constructor(private _category:CategoryService,private fb:FormBuilder) { 
     this.categoryForm = this.fb.group({
       id:'',
-      name:'',
-      description:'',
-      status:'',
+      name:['', Validators.required],
+      description:['', Validators.required],
+      status:['', Validators.required],
     })
   }
   
@@ -27,13 +27,21 @@ export class CategoryComponent implements OnInit{
     this.reload()
   }
   submit(data:any){
-    if(this.options == 'Submit') {
-      this._category.createCategory(data).subscribe(data => {
-    })
-    } else {
+    if(this.options == 'Submit' ) {
+      this._category.createCategory(data).subscribe({
+        next:(data) => {
+          this.reload()
+        },
+        error: (e) => console.error(e)
+      })
+    } 
+    if(this.options == 'Edit') {
       console.log(data);
-      this._category.updateCategory(data).subscribe(data => {
-        console.log(data);
+      this._category.updateCategory(data).subscribe({
+        next:(data) => {
+          this.reload()
+        },
+        error: (e) => console.error(e)
       })
     }
     this.reload();
@@ -58,10 +66,14 @@ export class CategoryComponent implements OnInit{
       this.reload();
     })
   }
+
   reload() {
-    this._category.getCategory().subscribe(data => {
-      this.category = data
-      this.refresh()
+    this._category.getCategory().subscribe({
+      next:(data) => {
+        this.category = data;
+        this.refresh()
+      },
+      error: (e) => console.error(e)
     })
   }
   refresh() {
