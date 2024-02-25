@@ -13,15 +13,15 @@ export class ProductsComponent implements OnInit{
   products:any = [];
   productForm:FormGroup;
   options:any = 'Submit'
-  selectedFile: File | null = null;
+  selectedFileName: string = ''; 
 
   constructor(private _products: ProductsService,private fb:FormBuilder) {
     this.productForm = this.fb.group({
-      name:['', Validators.required],
+      name:[''],
+      image:[null],
       packSize:['', Validators.required],
       category:['', Validators.required],
       MRP:['', Validators.required],
-      image:[''],
       status:['', Validators.required]
     })
    }
@@ -30,8 +30,16 @@ export class ProductsComponent implements OnInit{
     this.reload()
   }
 
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0] as File;
+  preventDefaultSubmit(event: Event) {
+    event.preventDefault();
+  }
+  uploadFile(event:any) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.productForm.patchValue({
+      image:file
+    })
+    this.productForm.get('image').updateValueAndValidity()
+    this.selectedFileName = file ? file.name : '';
   }
   
   submit(data:any){
@@ -81,6 +89,7 @@ export class ProductsComponent implements OnInit{
   reload() {
     this._products.getProducts().subscribe({
       next:(data) => {
+        console.log(data);
         this.products = data;
         this.refresh()
       },

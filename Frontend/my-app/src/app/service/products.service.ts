@@ -17,11 +17,31 @@ export class ProductsService {
   }
 
   createProducts(data:any): Observable<any>  {
-    return this._http.post(`${baseURL}/create`,data,this.httOptions())
+    let formData: any = new FormData();
+    formData.append('name',data.name);
+    formData.append('image',data.image);
+    formData.append('packSize',data.packSize);
+    formData.append('MRP',data.MRP);
+    formData.append('status',data.status);
+    formData.append('category',data.category);
+    console.log(formData);
+    return this._http.post<any>(`${baseURL}/create`,formData)
   }
   // Update Product
   updateProduct(data:any): Observable<any>  {
-    return this._http.put(`${baseURL}/update/${data.id}`,data,this.httOptions())
+    let formData: FormData = new FormData();
+  formData.append('name', data.name);
+  formData.append('packSize', data.packSize);
+  formData.append('MRP', data.MRP);
+  formData.append('status', data.status);
+  formData.append('category', data.category);
+  
+  // Check if image is provided
+  if (data.image instanceof File) {
+    formData.append('image', data.image);
+  }
+
+  return this._http.put<any>(`${baseURL}/update/${data.id}`, formData)
   }
 
   deleteProducts(id:any): Observable<any>  {
