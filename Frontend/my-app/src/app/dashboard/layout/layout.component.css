@@ -20,6 +20,10 @@ header {
     margin-right: 7%;
     width: auto;
 }
+.logo2 button {
+    background: none;
+    border: none;
+}
 .logo2 mat-icon{
     /* border: 1px solid white; */
     width: 40px;

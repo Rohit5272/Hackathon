@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 
@@ -11,20 +11,19 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   userForm: FormGroup;
+  hide = true;
 
-  constructor(private fb:FormBuilder,private _auth:AuthService
-    ,private _router:Router) {
+  constructor(private fb:FormBuilder,private _auth:AuthService, private _router:Router) {
     this.userForm = this.fb.group({
-      email:'',
-      name:'',
-      password:''
+      email:['', [Validators.required, Validators.email]], 
+      password:['', Validators.required] 
     })
   }
 
   submit(user:any) {
-    console.log(user);
+    // console.log(user);
     this._auth.login(user).subscribe((data) => {
-      console.log(data);
+      // console.log(data);
       this._router.navigate(['/dashboard']);
       localStorage.setItem('user', JSON.stringify(data))
     })

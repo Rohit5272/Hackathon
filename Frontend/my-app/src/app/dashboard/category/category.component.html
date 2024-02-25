@@ -37,15 +37,15 @@
             <input type="text" style="display: none;" formControlName="id">
             <mat-form-field>
                 <mat-label>Name</mat-label>
-                <input type="text" formControlName="name"  matInput>
+                <input type="text" formControlName="name"  matInput required>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Description</mat-label>
-                <input type="text" formControlName="description"  matInput>
+                <input type="text" formControlName="description"  matInput required>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Status</mat-label>
-                <mat-select formControlName="status">
+                <mat-select formControlName="status" required>
                     <mat-option value="true">Active</mat-option>
                     <mat-option value="false">Inactive</mat-option>
                 </mat-select>

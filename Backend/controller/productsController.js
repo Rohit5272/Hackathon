@@ -51,7 +51,6 @@ exports.getProducts = (req, res) => {
 // Get Single Product
 exports.getSingleProduct = (req, res) => {
   const productId = req.params.id;
-  console.log(productId);
   Product.findById(productId)
     .then((product) => {
       if (!product) {
@@ -88,7 +87,6 @@ exports.updateProduct = (req, res) => {
     const url = req.protocol + "://" + req.get("host");
     updateData.image = url + "/public/" + req.file.filename;
   }
-  console.log(updateData);
   // Check if category is provided and exists
   if (updateData.category) {
     Category.findOne({ name: updateData.category })
@@ -121,17 +119,3 @@ exports.updateProduct = (req, res) => {
   }
 };
 
-
-// Function to update the product after ensuring category existence
-function updateProduct(productId, updateData, res) {
-  Product.findByIdAndUpdate(productId, updateData, { new: true })
-    .then((product) => {
-      if (!product) {
-        return res.status(404).json({ message: "Product not found" });
-      }
-      res.json({ message: "Updated Successfully", product });
-    })
-    .catch((error) => {
-      res.status(500).json({ message: "Internal Server Error" });
-    });
-}

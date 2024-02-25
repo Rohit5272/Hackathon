@@ -34,20 +34,22 @@
     margin: 0;
     color: rgb(124, 122, 122);
 }
-.input-field {
+.input-fields {
     width: 100%;
     padding: 5%;
     margin-top: 5%;
+    /* border: 1px solid red; */
 }
-input {
-    border: 1px solid gray;
-    width: 98%;
-    padding: 2% 2%;
-    border-radius: 5px;
-    margin-bottom: 5%;
+.input-field {
+    width: 95%;
+    margin-left: 2%;
+    width: 95%;
     margin-top: 2%;
 }
-button {
+.input-field button {
+    border: none;
+}
+.btn {
     color: white;
     background-color: rgb(112, 33, 186);
     width: 100%;
@@ -56,5 +58,10 @@ button {
     font-size: 1rem;
     border-radius: 5px;
     margin-top: 10%;
+}
+.example-container mat-form-field + mat-form-field {
+  margin-left: 8px;
+  width: 100%;
+  border: 1px solid black;
 }
 

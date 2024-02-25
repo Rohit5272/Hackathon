@@ -46,25 +46,25 @@
             <!-- <input type="text" style="display: none;" formControlName="id"> -->
             <mat-form-field>
                 <mat-label>Name</mat-label>
-                <input type="text" formControlName="name"  matInput>
+                <input type="text" formControlName="name"  matInput required>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Pack Size</mat-label>
-                <input type="text" formControlName="packSize"  matInput>
+                <input type="text" formControlName="packSize"  matInput required>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Category</mat-label>
-                <input type="text" formControlName="category"  matInput>
+                <input type="text" formControlName="category"  matInput required>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>MRP</mat-label>
-                <input type="text" formControlName="MRP"  matInput>
+                <input type="text" formControlName="MRP"  matInput required>
             </mat-form-field> 
             <mat-form-field>
                 <mat-label>Upload File</mat-label>
                     <div class="box">
-                        <input type="file" style="display: none" #fileInput (change)="uploadFile($event)">
-                        <input matInput [value]="selectedFileName" placeholder="Select a file" readonly>
+                        <input type="file" style="display: none" #fileInput (change)="uploadFile($event)" required>
+                        <input matInput [value]="selectedFileName" placeholder="Select a file" readonly required>
                         <button mat-icon-button (click)="preventDefaultSubmit($event); fileInput.click()">
                             <mat-icon>upload</mat-icon>
                         </button>
@@ -72,7 +72,7 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Status</mat-label>
-                <mat-select formControlName="status">
+                <mat-select formControlName="status" required>
                     <mat-option value="true">Active</mat-option>
                     <mat-option value="false">Inactive</mat-option>
                 </mat-select>

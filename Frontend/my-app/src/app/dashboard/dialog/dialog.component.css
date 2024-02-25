@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+}
+.container h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.7rem;
+    font-weight: 500;
+    /* border: 1px solid black; */
+}
+.container mat-icon {
+    color: red;
+    font-size: 2rem;
+    margin: 0;
+    /* border: 1px solid black; */
+    width: 40px;
+    height: 70%;
+    /* margin-top: 3px; */
+}
+.container h3 {
+    font-size: 1.3rem;
+    color: grey;
+    font-weight: 400;
+    padding: 0;
+}
+.btn {
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid black; */
+    width: 80%;
+    margin-top: 7%;
+}
+.btn button {
+  margin: 1% 5%;
+  border-radius: 25px;
+  border: 1px solid black;
+  padding: 2% 7%;
+  background: none;
+}
+.btn button:last-child {
+  background-color: #662671;
+  color: white;
+}

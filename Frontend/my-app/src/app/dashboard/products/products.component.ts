@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
+import { DialogService } from 'src/app/service/dialog.service';
 import { ProductsService } from 'src/app/service/products.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class ProductsComponent implements OnInit{
   options:any = 'Submit'
   selectedFileName: string = ''; 
 
-  constructor(private _products: ProductsService,private fb:FormBuilder) {
+  constructor(private _products: ProductsService,private fb:FormBuilder,
+    private _dialog:DialogService) {
     this.productForm = this.fb.group({
       name:[''],
       image:[null],
@@ -81,10 +83,17 @@ export class ProductsComponent implements OnInit{
 
   delete(id:any){
     console.log(id);
-    this._products.deleteProducts(id).subscribe(data => {
-      console.log(data);
-      this.reload();
+    this._dialog.openConfirmDialog("Are you sure you want to delete ?","Delete")
+    .afterClosed().subscribe(res => {
+      console.log(res);
+      if(res){
+        this._products.deleteProducts(id).subscribe(data => {
+        console.log(data);
+        this.reload();
+      })
+      }
     })
+    
   }
   reload() {
     this._products.getProducts().subscribe({

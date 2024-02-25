@@ -8,6 +8,7 @@ import { CategoryComponent } from './category/category.component';
 import { ProductsComponent } from './products/products.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MaterialModule } from '../material/material.module';
     HomeComponent,
     LayoutComponent,
     CategoryComponent,
-    ProductsComponent
+    ProductsComponent,
+    DialogComponent
   ],
   imports: [
     CommonModule,

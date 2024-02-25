@@ -4,13 +4,21 @@
             <img src="https://s3-alpha-sig.figma.com/img/9e94/6a94/4ef20bfd62fdde437d3084005e68980d?Expires=1709510400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SP0BlV~tF2Q9JtcTiKIl-m2nkvcr2p~Ak~ED~XnuDnRilSAEt1L3TFc6T~n-MDeu8349o4HNa97vz1XGnPKki0GgLutWROBQL9K8W2hYhYfx~Tk2VeZ0OHwMX-EZok4urPAVOCX8B4PmTs0w6Jbab2d3PAXgbc0BnlkaMS1bMerPNFDawLVJkxfW5D~GvdthYLvL3jtEYOIBrYp1nYMiQxgKPI7Qr6dTP2JiTrd06u2akae3SMtqLgtDu1yWJV-v2NBAkNrWf8dfsA8N2vccQj3fwetCcBCSpTWMnLMlCbueFqMtjlL7nWEHN8XTWCIYYt2MYI89EFUWxpKnh-fAIQ__" alt="">
         </div>
         <h2>welcome to Digitalflake Admin</h2>
-        <div class="input-field">
+        <div class="input-fields">
             <form [formGroup]="userForm" (ngSubmit)="submit(userForm.value)">
-                <label for="">Email ID</label><br>
-                <input type="email" formControlName="email"><br>
-                <label for="">Password</label><br>
-                <input type="password" formControlName="password"><br>
-                <button>Log In</button>
+                <mat-form-field class="input-field">
+                    <mat-label>Enter your email</mat-label>
+                    <input matInput placeholder="pat@example.com" formControlName="email" required>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="input-field">
+                    <mat-label>Enter your password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <button class="btn" [disabled]="!userForm.valid">Log In</button>
         </form>
         </div>
     </div>

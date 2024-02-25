@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { CategoryService } from 'src/app/service/category.service';
+import { DialogService } from 'src/app/service/dialog.service';
 
 @Component({
   selector: 'app-category',
@@ -14,7 +15,8 @@ export class CategoryComponent implements OnInit{
   categoryForm:FormGroup;
   options:any = 'Submit';
 
-  constructor(private _category:CategoryService,private fb:FormBuilder) { 
+  constructor(private _category:CategoryService,private fb:FormBuilder,
+    private _dialog:DialogService) { 
     this.categoryForm = this.fb.group({
       id:'',
       name:['', Validators.required],
@@ -61,9 +63,15 @@ export class CategoryComponent implements OnInit{
 
   delete(id:any){
     console.log(id);
-    this._category.deleteProducts(id).subscribe(data => {
-      console.log(data);
-      this.reload();
+    this._dialog.openConfirmDialog("Are you sure you want to delete ?","Delete")
+    .afterClosed().subscribe(res => {
+      console.log(res);
+      if(res){
+        this._category.deleteProducts(id).subscribe(data => {
+        console.log(data);
+        this.reload();
+      })
+      }
     })
   }
 
