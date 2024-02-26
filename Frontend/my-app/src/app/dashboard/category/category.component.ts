@@ -29,7 +29,8 @@ export class CategoryComponent implements OnInit{
     this.reload()
   }
   submit(data:any){
-    if(this.options == 'Submit' ) {
+    if(this.categoryForm.valid) {
+      if(this.options == 'Submit' ) {
       this._category.createCategory(data).subscribe({
         next:(data) => {
           this.reload()
@@ -46,8 +47,8 @@ export class CategoryComponent implements OnInit{
         error: (e) => console.error(e)
       })
     }
-    this.reload();
     this.show = true
+    }
   }
 
   edit(data:any){

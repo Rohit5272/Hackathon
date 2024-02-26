@@ -3,8 +3,9 @@
         <h2><strong>digital</strong>flake</h2>
     </div>
     <div class="logo2">
-        <button (click)="logout()"><mat-icon>account_circle</mat-icon></button>
+        <button (click)="change()"><mat-icon>account_circle</mat-icon></button>
     </div>
+    <button (click)="logout()" *ngIf="show"  class="btn" mat-raised-button [@slideInFromTop]>Log Out</button>
 </header>
 <div class="container">
     <div class="side">

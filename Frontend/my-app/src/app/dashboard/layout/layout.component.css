@@ -32,6 +32,17 @@ header {
     font-size: 40px;
     margin-top: 30%;
 }
+.btn {
+    position: absolute;
+    right: 0;
+    margin-top: 6%;
+    margin-right: 6.5%;
+    /* border-radius: 3px; */
+    border: 1px solid red;
+    color: red !important;
+    background-color: white;
+    animation: slideIn 0.5s ease forwards; 
+}
 .container {
     display: flex;
 }
@@ -66,4 +77,13 @@ header {
 a {
     text-decoration: none;
     color: black;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-200%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }

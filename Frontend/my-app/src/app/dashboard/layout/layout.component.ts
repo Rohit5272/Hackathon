@@ -5,12 +5,18 @@ import { DialogService } from 'src/app/service/dialog.service';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css']
+  styleUrls: ['./layout.component.css'],
+  
 })
 export class LayoutComponent {
 
+  show:boolean = false
+
   constructor(private _user:AuthService,private _dialog:DialogService) {}
 
+  change() {
+    this.show = !this.show
+  }
   logout() {
     this._dialog.openConfirmDialog("Are you sure you want to log out ?","Log Out")
     .afterClosed().subscribe(res => {

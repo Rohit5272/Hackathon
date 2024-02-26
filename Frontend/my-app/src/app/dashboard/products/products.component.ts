@@ -19,8 +19,8 @@ export class ProductsComponent implements OnInit{
   constructor(private _products: ProductsService,private fb:FormBuilder,
     private _dialog:DialogService) {
     this.productForm = this.fb.group({
-      name:[''],
-      image:[null],
+      name:['',Validators.required],
+      image:[null,Validators.required],
       packSize:['', Validators.required],
       category:['', Validators.required],
       MRP:['', Validators.required],
@@ -45,26 +45,29 @@ export class ProductsComponent implements OnInit{
   }
   
   submit(data:any){
-    if(this.options == 'Submit') {
-      console.log(data);
-      this._products.createProducts(data).subscribe({
-        next:(data) => {
-          this.reload()
-        },
-        error: (e) => console.error(e)
-      })
+    if(this.productForm.valid) {
+      if(this.options == 'Submit') {
+        console.log(data);
+        this._products.createProducts(data).subscribe({
+          next:(data) => {
+            this.reload()
+          },
+          error: (e) => console.error(e)
+        })
+      }
+      if(this.options == 'Edit') {
+        console.log(data);
+        this._products.updateProduct(data).subscribe({
+          next:(data) => {
+            this.reload()
+          },
+          error: (e) => console.error(e)
+        })
+      }
+      this.reload();
+      this.show = true;
+      this.selectedFileName = '';
     }
-    if(this.options == 'Edit') {
-      console.log(data);
-      this._products.updateProduct(data).subscribe({
-        next:(data) => {
-          this.reload()
-        },
-        error: (e) => console.error(e)
-      })
-    }
-    this.reload();
-    this.show = true
   }
 
   edit(data:any){

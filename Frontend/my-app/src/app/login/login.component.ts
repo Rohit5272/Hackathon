@@ -12,6 +12,7 @@ export class LoginComponent {
 
   userForm: FormGroup;
   hide = true;
+  errorMessage: string | null = null;
 
   constructor(private fb:FormBuilder,private _auth:AuthService, private _router:Router) {
     this.userForm = this.fb.group({
@@ -20,12 +21,20 @@ export class LoginComponent {
     })
   }
 
-  submit(user:any) {
-    // console.log(user);
-    this._auth.login(user).subscribe((data) => {
-      // console.log(data);
-      this._router.navigate(['/dashboard']);
-      localStorage.setItem('user', JSON.stringify(data))
-    })
+  submit(user: any) {
+    this.errorMessage = null; // Clear any previous error message
+    this._auth.login(user).subscribe({
+      next: (data) => {
+        this._router.navigate(['/dashboard']);
+        localStorage.setItem('user', JSON.stringify(data));
+      },
+      error: (error) => {
+        if (error.status === 401) {
+          this.errorMessage = 'Invalid email or password';
+        } else {
+          this.errorMessage = 'An unexpected error occurred. Please try again later.';
+        }
+      }
+    });
   }
 }

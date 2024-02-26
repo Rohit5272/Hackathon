@@ -38,10 +38,16 @@
             <mat-form-field>
                 <mat-label>Name</mat-label>
                 <input type="text" formControlName="name"  matInput required>
+                <mat-error *ngIf="categoryForm.get('name').invalid && categoryForm.get('name').touched">
+                    Name is required
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Description</mat-label>
                 <input type="text" formControlName="description"  matInput required>
+                <mat-error *ngIf="categoryForm.get('description').invalid && categoryForm.get('description').touched">
+                    Description is required
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Status</mat-label>
@@ -49,6 +55,9 @@
                     <mat-option value="true">Active</mat-option>
                     <mat-option value="false">Inactive</mat-option>
                 </mat-select>
+                <mat-error *ngIf="categoryForm.get('status').invalid && categoryForm.get('status').touched">
+                    Status is required
+                </mat-error>
             </mat-form-field>
             <div class="btn">
                 <button (click)="change()">Cancel</button>

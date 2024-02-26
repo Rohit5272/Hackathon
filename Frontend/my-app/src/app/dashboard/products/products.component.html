@@ -47,25 +47,37 @@
             <mat-form-field>
                 <mat-label>Name</mat-label>
                 <input type="text" formControlName="name"  matInput required>
+                <mat-error *ngIf="productForm.get('name').invalid && productForm.get('name').touched">
+                    Name is required
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Pack Size</mat-label>
                 <input type="text" formControlName="packSize"  matInput required>
+                <mat-error *ngIf="productForm.get('packSize').invalid && productForm.get('packSize').touched">
+                    packSize is required
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Category</mat-label>
                 <input type="text" formControlName="category"  matInput required>
+                <mat-error *ngIf="productForm.get('category').invalid && productForm.get('category').touched">
+                    category is required
+                </mat-error>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>MRP</mat-label>
                 <input type="text" formControlName="MRP"  matInput required>
+                <mat-error *ngIf="productForm.get('MRP').invalid && productForm.get('MRP').touched">
+                    MRP is required
+                </mat-error>
             </mat-form-field> 
             <mat-form-field>
                 <mat-label>Upload File</mat-label>
                     <div class="box">
                         <input type="file" style="display: none" #fileInput (change)="uploadFile($event)" required>
                         <input matInput [value]="selectedFileName" placeholder="Select a file" readonly required>
-                        <button mat-icon-button (click)="preventDefaultSubmit($event); fileInput.click()">
+                        <button (click)="preventDefaultSubmit($event); fileInput.click()">
                             <mat-icon>upload</mat-icon>
                         </button>
                     </div>
@@ -76,6 +88,9 @@
                     <mat-option value="true">Active</mat-option>
                     <mat-option value="false">Inactive</mat-option>
                 </mat-select>
+                <mat-error *ngIf="productForm.get('status').invalid && productForm.get('status').touched">
+                    status is required
+                </mat-error>
             </mat-form-field>
             <div class="btn">
                 <button (click)="change()">Cancel</button>
