@@ -60,7 +60,9 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Category</mat-label>
-                <input type="text" formControlName="category"  matInput required>
+                <mat-select formControlName="category" required>
+                    <mat-option *ngFor="let cat of category" [value]="cat.name">{{ cat.name }}</mat-option>
+                </mat-select>
                 <mat-error *ngIf="productForm.get('category').invalid && productForm.get('category').touched">
                     category is required
                 </mat-error>

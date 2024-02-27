@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const config = require("./config");
+const config = require("./config/config");
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/userRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");

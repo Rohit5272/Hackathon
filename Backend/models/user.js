@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const config = require("../config");
+const config = require("../config/config");
 
 const User = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
@@ -26,7 +26,18 @@ User.methods.generateJWT = function () {
       id: this._id,
       exp: Math.floor(expiration.getTime() / 1000),
     },
-    config.secret);
+    config.secret
+  );
+};
+User.methods.generateJWTforemail = function () {
+  return jwt.sign(
+    {
+      email: this.email,
+      id: this._id,
+      expiresIn: "1m",
+    },
+    config.secret
+  );
 };
 
 module.exports = mongoose.model("User", User);

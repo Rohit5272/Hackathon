@@ -6,10 +6,7 @@ const productSchema = new mongoose.Schema({
   packSize: { type: String, required: true },
   MRP: { type: Number, required: true },
   status: { type: Boolean, required: true },
-  category: {
-    type: String,
-    ref: "Category",
-  },
+  category: {type: String,ref: "Category",required:true},
 });
 
 module.exports = mongoose.model("Product", productSchema);

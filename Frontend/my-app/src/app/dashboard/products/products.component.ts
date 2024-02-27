@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
+import { CategoryService } from 'src/app/service/category.service';
 import { DialogService } from 'src/app/service/dialog.service';
 import { ProductsService } from 'src/app/service/products.service';
 
@@ -14,9 +15,10 @@ export class ProductsComponent implements OnInit{
   products:any = [];
   productForm:FormGroup;
   options:any = 'Submit'
+  category:any = []
   selectedFileName: string = ''; 
 
-  constructor(private _products: ProductsService,private fb:FormBuilder,
+  constructor(private _products: ProductsService,private fb:FormBuilder,private _category:CategoryService,
     private _dialog:DialogService) {
     this.productForm = this.fb.group({
       name:['',Validators.required],
@@ -30,6 +32,7 @@ export class ProductsComponent implements OnInit{
 
   ngOnInit() {
     this.reload()
+    this.getCategory()
   }
 
   preventDefaultSubmit(event: Event) {
@@ -104,6 +107,7 @@ export class ProductsComponent implements OnInit{
         console.log(data);
         this.products = data;
         this.refresh()
+        this.getCategory()
       },
       error: (e) => console.error(e)
     })
@@ -122,6 +126,15 @@ export class ProductsComponent implements OnInit{
     this.show = !this.show;
     this.reload();
     this.options = 'Submit'
+  }
+  getCategory(){
+    this._category.getCategory().subscribe({
+      next:(data) => {
+        console.log(data);
+        this.category = data
+      },
+      error: (e) => console.log(e)
+    })
   }
 
 }

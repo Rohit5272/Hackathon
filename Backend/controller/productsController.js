@@ -5,24 +5,17 @@ const Category = require("../models/category");
 exports.createProduct = (req, res) => {
   const url = req.protocol + "://" + req.get("host");
 
-  const categoryName = req.body.category;
-  Category.findOne({ name: categoryName })
-    .then((category) => {
-      if (!category) {
-        return res.status(400).json({ message: "Category not found" });
-      }
+  const product = new Product({
+    name: req.body.name,
+    image: url + "/public/" + req.file.filename,
+    packSize: req.body.packSize,
+    MRP: req.body.MRP,
+    status: req.body.status,
+    category: req.body.category,
+  });
 
-      const product = new Product({
-        name: req.body.name,
-        image: url + "/public/" + req.file.filename,
-        packSize: req.body.packSize,
-        MRP: req.body.MRP,
-        status: req.body.status,
-        category: req.body.category
-      });
-
-      return product.save();
-    })
+  product
+    .save()
     .then((data) => {
       res.status(201).json({
         message: "Product created successfully!",
@@ -36,6 +29,7 @@ exports.createProduct = (req, res) => {
       }
     });
 };
+
 
 // Get All Products
 exports.getProducts = (req, res) => {
@@ -82,40 +76,25 @@ exports.updateProduct = (req, res) => {
   const productId = req.params.id;
   let updateData = req.body;
 
-  // Check if file was uploaded
   if (req.file) {
     const url = req.protocol + "://" + req.get("host");
     updateData.image = url + "/public/" + req.file.filename;
   }
-  // Check if category is provided and exists
-  if (updateData.category) {
-    Category.findOne({ name: updateData.category })
-      .then((category) => {
-        if (!category) {
-          return res.status(400).json({ message: "Category not found" });
-        }
-        updateData.category = category.name;
 
-        // Update the product
-        Product.findByIdAndUpdate(productId, updateData, { new: true })
-          .then((updatedProduct) => {
-            if (!updatedProduct) {
-              return res.status(404).json({ message: "Product not found" });
-            }
-            res.json({
-              message: "Updated Successfully",
-              product: updatedProduct,
-            });
-          })
-          .catch((error) => {
-            console.error("Error updating product:", error);
-            res.status(500).json({ message: "Internal Server Error" });
-          });
-      })
-      .catch((error) => {
-        console.error("Error finding category:", error);
-        res.status(500).json({ message: "Internal Server Error" });
+  Product.findByIdAndUpdate(productId, updateData, { new: true })
+    .then((updatedProduct) => {
+      if (!updatedProduct) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+      res.json({
+        message: "Updated Successfully",
+        product: updatedProduct,
       });
-  }
+    })
+    .catch((error) => {
+      console.error("Error updating product:", error);
+      res.status(500).json({ message: "Internal Server Error" });
+    });
 };
+
 
