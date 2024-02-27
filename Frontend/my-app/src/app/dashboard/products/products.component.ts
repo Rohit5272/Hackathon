@@ -16,7 +16,7 @@ export class ProductsComponent implements OnInit{
   productForm:FormGroup;
   options:any = 'Submit'
   category:any = []
-  selectedFileName: string = ''; 
+  selectedFileName: string = '';
 
   constructor(private _products: ProductsService,private fb:FormBuilder,private _category:CategoryService,
     private _dialog:DialogService) {
@@ -59,8 +59,11 @@ export class ProductsComponent implements OnInit{
         })
       }
       if(this.options == 'Edit') {
-        console.log(data);
-        this._products.updateProduct(data).subscribe({
+        // console.log(data);
+        const { id, name, image, category,packSize, MRP, status } = data;
+        const updateData = {id,name,image,category,packSize,MRP,status}
+        console.log(updateData);
+        this._products.updateProduct(updateData).subscribe({
           next:(data) => {
             this.reload()
           },
@@ -79,7 +82,7 @@ export class ProductsComponent implements OnInit{
       id:data._id,
       name:data.name,
       packSize:data.packSize,
-      category:data.category,
+      category:data.category.name,
       MRP:data.MRP,
       image:data.image,
       status:data.status
@@ -113,14 +116,7 @@ export class ProductsComponent implements OnInit{
     })
   }
   refresh() {
-    this.productForm = this.fb.group({
-      name:'',
-      packSize:'',
-      category:'',
-      MRP:'',
-      image:'',
-      status:''
-    })
+    this.productForm.reset()
   }
   change(){
     this.show = !this.show;
@@ -130,7 +126,7 @@ export class ProductsComponent implements OnInit{
   getCategory(){
     this._category.getCategory().subscribe({
       next:(data) => {
-        console.log(data);
+        // console.log(data);
         this.category = data
       },
       error: (e) => console.log(e)
