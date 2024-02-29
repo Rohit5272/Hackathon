@@ -12,6 +12,6 @@ router.post("/login", User.login);
 router.post('/sendemail',User.sendemail)
 
 // reset Password
-router.post("/resetpassword", authenticate, User.resetPassword);
+router.post("/reset", authenticate, User.resetPassword);
 
 module.exports = router;

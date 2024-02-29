@@ -21,18 +21,6 @@ mongoose
 // Make "public" Folder Publicly Available
 app.use("/public", express.static("public"));
 
-// Define error handling middleware
-app.use((err, req, res, next) => {
-  // Check if the error is related to JSON parsing
-  if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
-    // Send a meaningful error response
-    res.status(400).json({ error: "Invalid JSON" });
-  } else {
-    // For other types of errors, proceed to the next middleware
-    next();
-  }
-});
-
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 app.use(express.json());

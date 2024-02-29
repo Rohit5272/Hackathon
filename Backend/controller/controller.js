@@ -33,10 +33,9 @@ exports.sendemail = async (req,res) => {
   const email = req.body.email
   if(email) {
     const user = await User.findOne({email:email})
-    console.log(user);
     const withToken = { email: user.email, id: user._id };
     withToken.token = user.generateJWTforemail();
-    const link = `http://127.0.0.1:3000/api/user/reset/${user._id}/${withToken.token}`;
+    const link = `http://localhost:4200/reset/${withToken.token}`;
     // Send Email
     const transporter = nodemailer.createTransport({
       service:"gmail",
@@ -51,7 +50,7 @@ exports.sendemail = async (req,res) => {
       subject: "Change Password",
       html: `<a href=${link}>Click Here</a> to Reset Your news Password`,
     });
-    res.send('Reset email link sent')
+    res.json({ message: "link send successfully" ,data:link});
   } else {
     res.send("email is required")
   }
@@ -59,21 +58,19 @@ exports.sendemail = async (req,res) => {
 
 exports.resetPassword = async (req,res) => {
   const {password, confirm_password} = req.body
-  const id = req.userData.id
+  const id = req.userData.id;
   const user = await User.findById(id)
   try {
     if(password === confirm_password) {
       user.password = user.generateHash(password);
       res.send(user)
-      const result = await User.findByIdAndUpdate(user._id,{$set:{password: user.password }})
-      console.log(result);
+      await User.findByIdAndUpdate(user._id,{$set:{password: user.password }})
     } else {
       res.send("password not match")
     }
   } catch (error) {
     res.send(error);
   }
-
 }
 
 

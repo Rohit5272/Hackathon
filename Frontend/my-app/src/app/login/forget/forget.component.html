@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="msg">{{msg}}</div>
+    <h1>Did you forget your password</h1>
+    <p>Enter your email address and we'll send you a link to restore password</p>
+    <div class="main">
+        <form [formGroup]="emailForm" (ngSubmit)="submit(emailForm.value)">
+        <label for="email">Email Address</label><br>
+        <input type="text" formControlName="email"><br>
+        <button>Request reset link</button>
+    </form>
+    </div>
+    <button (click)="closeDialog()">Back to log in</button>
+</div>

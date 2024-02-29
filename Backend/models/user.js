@@ -34,7 +34,7 @@ User.methods.generateJWTforemail = function () {
     {
       email: this.email,
       id: this._id,
-      expiresIn: "1m",
+      expiresIn: "10m",
     },
     config.secret
   );

@@ -46,7 +46,7 @@ table {
   border: none;
 }
 table th {
-  background-color: #fff8b7;
+  background-color: #f9f2b2;
   padding: 1%;
   margin-bottom: 2%;
 }
@@ -111,4 +111,5 @@ mat-form-field {
   background-color: #662671;
   color: white;
 }
+
 

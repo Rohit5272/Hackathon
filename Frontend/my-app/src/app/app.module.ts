@@ -10,12 +10,16 @@ import { AuthGuard } from './guards/auth-guard.guard';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { ForgetComponent } from './login/forget/forget.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ForgetComponent,
+    ResetpasswordComponent
   ],
   imports: [
     BrowserModule,

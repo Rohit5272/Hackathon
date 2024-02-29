@@ -15,25 +15,25 @@ export class CategoryService {
 
   // Get Category
   getCategory(): Observable<any> {
-    return this._http.get(`${baseURL}/find`,this.httOptions())
+    return this._http.get(`${baseURL}/find`,this.httpOptions())
   }
 
   // Create Category
   createCategory(data:any): Observable<any> {
-    return this._http.post(`${baseURL}/create`,data,this.httOptions())
+    return this._http.post(`${baseURL}/create`,data,this.httpOptions())
   }
   // Update Category
   updateCategory(data:any): Observable<any> {
-    return this._http.put(`${baseURL}/update/${data.id}`,data,this.httOptions())
+    return this._http.put(`${baseURL}/update/${data.id}`,data,this.httpOptions())
   }
   
   // Delete Category
   deleteProducts(id:any): Observable<any> {
-    return this._http.delete(`${baseURL}/delete/${id}`,this.httOptions())
+    return this._http.delete(`${baseURL}/delete/${id}`,this.httpOptions())
   }
 
   // Authorization token
-  private httOptions() {
+  private httpOptions() {
     let token;
     if(this._auth.isAuthenticated()) {
       const user = JSON.parse(this._auth.isAuthenticated())

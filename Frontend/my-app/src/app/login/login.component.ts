@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
+import { ForgetService } from '../service/forget.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent {
   hide = true;
   errorMessage: string | null = null;
 
-  constructor(private fb:FormBuilder,private _auth:AuthService, private _router:Router) {
+  constructor(private fb:FormBuilder,private _auth:AuthService, private _router:Router,
+    private _forget:ForgetService) {
     this.userForm = this.fb.group({
       email:['', [Validators.required, Validators.email]], 
       password:['', Validators.required] 
@@ -36,5 +38,10 @@ export class LoginComponent {
         }
       }
     });
+  }
+
+  forgetpassword() {
+    console.log('Forget');
+    this._forget.openforget()
   }
 }
